@@ -1,0 +1,10 @@
+{
+    "name": "UCodeblock.UI",
+    "references": [
+        "UCodeblock"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}

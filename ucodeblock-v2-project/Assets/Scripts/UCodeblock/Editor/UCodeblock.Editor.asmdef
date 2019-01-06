@@ -1,0 +1,11 @@
+{
+    "name": "UCodeblock.Editor",
+    "references": [
+        "UCodeblock",
+        "UCodeblock.UI"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}
