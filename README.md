@@ -3,18 +3,28 @@
 > The new and improved version of UCodeblock!  
 Now with 20% better code, 50% less bugs and 100% more blocks!
 
-UCodeblock v2 aims at bringing a plugin to Unity, to allow players to script behaviours at runtime with visual codeblocks.  
-It's basically the runtime equivalent of a visual scripting editor.
+This plugin aims at bringing a **runtime** visual scripting editor to the Unity game engine, to allow users/players to script behaviours at runtime. An exemplary usecase could be an educational, programming-based game. The goal is to make the plugin similar to existing projects in other languages and environments, such as Google Blockly.
+
+The requirements for this goal are pretty complex, documentation is attempted inside the [wiki](https://github.com/YilianSource/ucodeblock-v2/wiki).
+
+## Table of Contents
+
+* [Installation](#installation)
+* [Usage](#usage)
+* [Contributing](#contributing)
+* [Credits](#credits)
+* [License](#license)
+
+---
+
+## Installation
+
+## Usage
+
+## Contributing
+
+## Credits
 
 ## License
 
-This project is licensed under the MIT license.
-
-## Features
-
-The goal of the project is to create a visual environment for players to script behaviours at runtime.  
-The requirements for this are pretty complex, documentation is attempted inside the [wiki](https://github.com/YilianSource/ucodeblock-v2/wiki).
-
-## Examples
-
-TODO
+This project is licensed under the [MIT license](LICENSE).

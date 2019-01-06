@@ -1,0 +1,5 @@
+# Tell linguist to ignore shader files, since they
+# are not the goal of this project, and simply needed
+# in order for TMP to work.
+*.shader linguist-vendored=false
+*.hlsl linguist-vendored=false
