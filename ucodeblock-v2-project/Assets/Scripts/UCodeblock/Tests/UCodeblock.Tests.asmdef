@@ -1,0 +1,16 @@
+{
+    "name": "UCodeblock.Tests",
+    "references": [
+        "UCodeblock",
+        "UCodeblock.Editor",
+        "UCodeblock.UI"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}
