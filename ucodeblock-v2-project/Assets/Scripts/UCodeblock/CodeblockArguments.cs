@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace UCodeblock
 {
-    public class CodeblockArguments
+    public class CodeblockArguments : IEnumerable<CodeblockArgument>
     {
         public static CodeblockArguments Empty => new CodeblockArguments(new CodeblockArgument[0]);
 
@@ -22,5 +21,8 @@ namespace UCodeblock
 
         public static CodeblockArguments FromArgumentTypes(params ArgumentType[] argTypes)
             => new CodeblockArguments(argTypes.Select(a => new CodeblockArgument(a)).ToArray());
+
+        public IEnumerator<CodeblockArgument> GetEnumerator() => ((IEnumerable<CodeblockArgument>)_arguments).GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

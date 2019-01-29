@@ -3,3 +3,4 @@
 # in order for TMP to work.
 *.shader linguist-vendored=false
 *.hlsl linguist-vendored=false
+*.cginc linguist-venored=false

@@ -3,7 +3,7 @@
 namespace UCodeblock
 {
     [Serializable]
-    public class CodeblockOperatorException : Exception
+    public class CodeblockOperatorException : CodeblockException
     {
         public CodeblockOperatorException() { }
         public CodeblockOperatorException(string message) : base(message) { }

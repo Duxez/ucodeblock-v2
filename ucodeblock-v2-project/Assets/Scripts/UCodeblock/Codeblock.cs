@@ -10,13 +10,23 @@ namespace UCodeblock
         public CodeblockArguments Arguments { get; set; }
         protected ICodeblockContext Context { get; private set; }
 
-        protected Codeblock()
+        public Codeblock()
         {
             Arguments = CodeblockArguments.FromArgumentTypes(ArgumentTypes);
         }
         public static Codeblock Create<T>() where T : Codeblock
         {
             Codeblock block = Activator.CreateInstance<T>();
+            return block;
+        }
+        public static Codeblock Create(Type type)
+        {
+            if (!type.IsClass || !type.IsSubclassOf(typeof(Codeblock)))
+                throw new CodeblockException($"The type {type.Name} is not a descendant type of Codeblock.");
+            if (type.GetConstructor(Type.EmptyTypes) == null)
+                throw new CodeblockException($"The type {type.Name} does not contain a default, parameterless constructor.");
+
+            Codeblock block = Activator.CreateInstance(type) as Codeblock;
             return block;
         }
 

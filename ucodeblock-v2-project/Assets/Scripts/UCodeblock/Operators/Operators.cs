@@ -12,9 +12,9 @@
     {
         [OperatorDisplay("==")]  Equal,
         [OperatorDisplay("!=")]  NotEqual,
-        [OperatorDisplay("<")]   LessThan,
+        [OperatorDisplay("<") ]  LessThan,
         [OperatorDisplay("<=")]  LessThanOrEqual,
-        [OperatorDisplay(">")]   GreaterThan,
+        [OperatorDisplay(">") ]  GreaterThan,
         [OperatorDisplay(">=")]  GreaterThanOrEqual
     }
 
