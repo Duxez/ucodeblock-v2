@@ -1,6 +1,7 @@
 # Tell linguist to ignore shader files, since they
 # are not the goal of this project, and simply needed
 # in order for TMP to work.
-*.shader linguist-vendored=false
-*.hlsl linguist-vendored=false
-*.cginc linguist-venored=false
+
+*.shader linguist-vendored=true
+*.hlsl linguist-vendored=true
+*.cginc linguist-venored=true
