@@ -44,12 +44,9 @@ namespace UCodeblock.Tests
             CodeblockSerializer serializer = GetSerializer();
 
             string serialized = serializer.SerializeCodeblock(dummyBlock);
-            Debug.Log(serialized);
             Codeblock deserialized = serializer.DeserializeCodeblock(serialized);
 
             Assert.AreEqual(serialized, serializer.SerializeCodeblock(deserialized));
-
-            Debug.Log(serialized);
         }
 
         [Test]
@@ -62,8 +59,6 @@ namespace UCodeblock.Tests
             ExecuteableCodeblockChain deserialized = serializer.DeserializeCodeblockChain(serialized);
 
             Assert.AreEqual(serialized, serializer.SerializeCodeblockChain(deserialized));
-
-            Debug.Log(serialized);
         }
 
         [Test]
@@ -76,8 +71,26 @@ namespace UCodeblock.Tests
             CodeblockTree deserialized = serializer.DeserializeCodeblockTree(serialized);
 
             Assert.AreEqual(serialized, serializer.SerializeCodeblockTree(deserialized));
+        }
 
+        [Test]
+        public void ConditionalBlockSerialization()
+        {
+            ActionCodeblock passExpression = new ActionCodeblock(() => Assert.Pass());
+
+            ConstantEvaluateable condition = new ConstantEvaluateable(true);
+            ConditionalCodeblock conditional = new ConditionalCodeblock();
+
+            conditional.Arguments[0].SetEvaluateable(condition);
+            conditional.Body.Add(passExpression);
+
+            CodeblockSerializer serializer = GetSerializer();
+
+            string serialized = serializer.SerializeCodeblock(conditional);
             Debug.Log(serialized);
+            Codeblock deserialized = serializer.DeserializeCodeblock(serialized);
+
+            Assert.AreEqual(serialized, serializer.SerializeCodeblock(deserialized));
         }
     }
 }

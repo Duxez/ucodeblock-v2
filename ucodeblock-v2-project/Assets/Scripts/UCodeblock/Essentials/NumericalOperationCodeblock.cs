@@ -11,26 +11,22 @@ namespace UCodeblock.Essentials
 
         public Argument Evaluate()
         {
-            if (Arguments[1].CanEvaluate)
-            {
-                INumericalTypeOperator numericalOperator = new NumberOperator();
-                NumericalOperator operation = (NumericalOperator)Arguments[1].Evaluateble.Evaluate().Value;
+            if (!Arguments[1].CanEvaluate)
+                throw new CodeblockExecutionException("The codeblock arguments do not contain an operation.");
 
-                // Numbers default to 0, if an argument is not given
-                object l = Arguments[0].Evaluateble?.Evaluate().Value ?? 0;
-                object r = Arguments[2].Evaluateble?.Evaluate().Value ?? 0;
+            INumericalTypeOperator numericalOperator = new NumberOperator();
+            NumericalOperator operation = (NumericalOperator)Arguments[1].Evaluateble.Evaluate().Value;
 
-                // If the operation is a division and the divisor is 0, throw a DivideByZeroException
-                if (operation == NumericalOperator.Division && (float)r == 0)
-                    throw new System.DivideByZeroException();
+            // Numbers default to 0, if an argument is not given
+            object l = Arguments[0].Evaluateble?.Evaluate().Value ?? 0;
+            object r = Arguments[2].Evaluateble?.Evaluate().Value ?? 0;
 
-                object value = EvaluateOperation(l, r, numericalOperator, operation);
-                return new Argument(value, ResultingType);
-            }
-            else
-            {
-                throw new CodeblockOperatorException("The codeblock arguments do not contain an operation.");
-            }
+            // If the operation is a division and the divisor is 0, throw a DivideByZeroException
+            if (operation == NumericalOperator.Division && (float)r == 0)
+                throw new System.DivideByZeroException();
+
+            object value = EvaluateOperation(l, r, numericalOperator, operation);
+            return new Argument(value, ResultingType);
         }
 
         private object EvaluateOperation(object l, object r, INumericalTypeOperator numericalOperator, NumericalOperator operation)
@@ -42,7 +38,7 @@ namespace UCodeblock.Essentials
                 case NumericalOperator.Multiplication: return numericalOperator.Multiply(l, r);
                 case NumericalOperator.Division: return numericalOperator.Divide(l, r);
 
-                default: throw new CodeblockOperatorException("An invalid operator was passed to the codeblock.");
+                default: throw new CodeblockExecutionException("An invalid operator was passed to the codeblock.");
             }
         }
     }

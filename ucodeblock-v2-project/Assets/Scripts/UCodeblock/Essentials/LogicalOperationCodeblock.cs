@@ -31,7 +31,7 @@ namespace UCodeblock.Essentials
                 case LogicalOperator.And: return logicalOperator.And(l, r);
                 case LogicalOperator.Or: return logicalOperator.Or(l, r);
 
-                default: throw new CodeblockOperatorException("An invalid operator was passed to the codeblock.");
+                default: throw new CodeblockExecutionException("An invalid operator was passed to the codeblock.");
             }
         }
     }

@@ -14,7 +14,7 @@ namespace UCodeblock.Essentials
         public Argument Evaluate()
         {
             if (!Arguments[0].CanEvaluate || !Arguments[2].CanEvaluate)
-                throw new CodeblockOperatorException("The codeblock arguments can not be empty.");
+                throw new CodeblockExecutionException("The codeblock arguments can not be empty.");
 
             object l = Arguments[0].Evaluateble.Evaluate().Value;
             object r = Arguments[2].Evaluateble.Evaluate().Value;
@@ -25,7 +25,7 @@ namespace UCodeblock.Essentials
 
             // Ensure the arguments don't have different types
             if (lType != rType)
-                throw new CodeblockOperatorException("The codeblock arguments must have the same type.");
+                throw new CodeblockExecutionException("The codeblock arguments must have the same type.");
 
             // Use the left argument to see which type the comparison should take
             IComparisonTypeOperator comparisonOperator;
@@ -36,7 +36,7 @@ namespace UCodeblock.Essentials
                 case ArgumentType.String: comparisonOperator = new StringOperator(); break;
                 case ArgumentType.Boolean: comparisonOperator = new BooleanOperator(); break;
 
-                default: throw new CodeblockOperatorException($"No valid operator found for argument type {lType}.");
+                default: throw new CodeblockExecutionException($"No valid operator found for argument type {lType}.");
             }
 
             object result = EvaluateOperation(l, r, comparisonOperator, operation);
@@ -56,7 +56,7 @@ namespace UCodeblock.Essentials
                 case ComparisonOperator.GreaterThan: return comparisonResult > 0;
                 case ComparisonOperator.GreaterThanOrEqual: return comparisonResult >= 0;
 
-                default: throw new CodeblockOperatorException("An invalid operator was passed to the codeblock.");
+                default: throw new CodeblockExecutionException("An invalid operator was passed to the codeblock.");
             }
         }
     }

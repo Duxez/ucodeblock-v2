@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace UCodeblock
 {
@@ -17,9 +13,24 @@ namespace UCodeblock
         {
             Type = type;
         }
+
         public void SetEvaluateable(IEvaluateableCodeblock evaluateable)
         {
-            Evaluateble = evaluateable;
+            if (AllowEvaluateable(evaluateable))
+            {
+                Evaluateble = evaluateable;
+            }
+            else
+            {
+                throw new ArgumentException($"Invalid IEvaluateableCodeblock Type ({evaluateable.ResultingType.ToString()} passed to CodeblockArgument ({Type.ToString()}");
+            }
+        }
+
+        public bool AllowEvaluateable(IEvaluateableCodeblock evaluateable)
+        {
+            if (Type == ArgumentType.Unknown || evaluateable.ResultingType == ArgumentType.Unknown) return true;
+
+            return Type == evaluateable.ResultingType;
         }
     }
 }

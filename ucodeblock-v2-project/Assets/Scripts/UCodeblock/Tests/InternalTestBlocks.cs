@@ -29,7 +29,7 @@ namespace UCodeblock.Tests
     internal class LogCodeblock : Codeblock, IExecuteableCodeblock
     {
         public override string Content => "Print %0";
-        public override ArgumentType[] ArgumentTypes => new ArgumentType[1] { ArgumentType.String };
+        public override ArgumentType[] ArgumentTypes => new ArgumentType[1] { ArgumentType.Unknown };
 
         public LogCodeblock() { }
 

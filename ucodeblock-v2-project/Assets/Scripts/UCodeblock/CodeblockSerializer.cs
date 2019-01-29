@@ -90,6 +90,7 @@ namespace UCodeblock
                 obj.Add("arguments", new JArray(arguments));
             }
 
+            // TODO: Maybe cleanup codeblock property serialization
             IEnumerable<PropertyInfo> codeblockProperties = blockType
                 .GetProperties(_codeblockPropertyBindings)
                 .Where(p => p.CanRead && p.GetCustomAttribute<CodeblockPropertyAttribute>() != null);
@@ -100,7 +101,15 @@ namespace UCodeblock
 
                 if (value != null)
                 {
-                    obj.Add(identifier, JToken.FromObject(value));
+                    JToken token = null;
+
+                    Type propertyType = property.PropertyType;
+                    if (propertyType == typeof(CodeblockTree)) token = SerializeCodeblockTreeToJObject(value as CodeblockTree);
+                    else if (propertyType == typeof(ExecuteableCodeblockChain)) token = SerializeCodeblockChainToJObject(value as ExecuteableCodeblockChain);
+                    else if (propertyType == typeof(Codeblock)) token = SerializeCodeblockToJObject(value as Codeblock);
+                    else token = JToken.FromObject(value);
+
+                    obj.Add(identifier, token);
                 }
             }
             
@@ -156,6 +165,7 @@ namespace UCodeblock
                     block.Arguments[i].SetEvaluateable(arguments[i]);
             }
 
+            // TODO: Maybe cleanup codeblock property serialization
             IEnumerable<PropertyInfo> codeblockProperties = blockType
                 .GetProperties(_codeblockPropertyBindings)
                 .Where(p => p.CanRead && p.GetCustomAttribute<CodeblockPropertyAttribute>() != null);
@@ -166,7 +176,14 @@ namespace UCodeblock
                 JProperty valueProperty = codeblockObject.Property(identifier);
                 if (valueProperty != null)
                 {
-                    object value = valueProperty.Value.ToObject(property.PropertyType);
+                    object value = null;
+
+                    Type propertyType = property.PropertyType;
+                    if (propertyType == typeof(CodeblockTree)) value = DeserializeCodeblockTree(valueProperty.Value.ToString());
+                    else if (propertyType == typeof(ExecuteableCodeblockChain)) value = DeserializeCodeblockChain(valueProperty.Value.ToString());
+                    else if (propertyType == typeof(Codeblock)) value = DeserializeCodeblock(valueProperty.Value.ToString());
+                    else value = valueProperty.Value.ToObject(property.PropertyType);
+
                     property.SetValue(block, value);
                 }
             }
