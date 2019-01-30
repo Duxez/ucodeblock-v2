@@ -4,4 +4,4 @@
 
 *.shader linguist-vendored=true
 *.hlsl linguist-vendored=true
-*.cginc linguist-venored=true
+*.cginc linguist-vendored=true
